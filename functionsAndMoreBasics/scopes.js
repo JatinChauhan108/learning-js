@@ -45,7 +45,8 @@ if (true) {
 // ++++++++++++++++++ interesting ++++++++++++++++++
 
 
-console.log(addone(5))
+console.log(addone(5))                                                   // accessing a function before its declaration
+                                                                         // no error
 
 function addone(num){
     return num + 1
@@ -53,7 +54,9 @@ function addone(num){
 
 
 
-addTwo(5)
-const addTwo = function(num){
+addTwo(5)                                                                // accessing a function (which has been stored in a variable) before its declaration
+                                                                         // gives error
+
+const addTwo = function(num){                                            // another way of declaring a function
     return num + 2
 }
