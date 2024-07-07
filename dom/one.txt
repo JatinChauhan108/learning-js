@@ -1,0 +1,36 @@
+DOM selectors
+
+--> window.document                                                                         // to select the document object
+
+--> document.getElementById()                                                               // used to select an HTML element by its id
+
+// below three are used for text selections of an HTML element
+    --> element.textContent                                                                 // selects the visible as well as invisible text in the element
+    --> element.innerText                                                                   // selects only the text visible on the webpage
+    --> element.innerHTML                                                                   // selects the visible text, invisible text as well as any html written inside the element
+
+
+--> element.getAttribute()
+--> element.setAttribute()
+
+--> element.style.backgroundColor
+--> element.style.padding
+--> element.style.borderRadius
+
+--> document.querySelector()                                                                // argument is given in the form similar to a CSS selector and first element picked by that selector is returned
+                                                                                            // can be used as document.querySelector()
+                                                                                            // as well as element.querySelector()
+
+
+--> document.querySelectorAll()                                                             // returns a NodeList based on the selector given in the argument
+                                                                                            // NodeList is not the same as array and functions of array must not be blindly applied on NodeList
+                                                                                            // though NodeList can be converted into an array and then array methods like map, filter can be applied on it
+                                                                                            // but we can also see the methods provided by the NodeList from the prototype
+                                                                                            // for eg., we can access the first element from the NodeList and change its color via indices eg., document.querySelectorAll('h1')[0].style.color = 'green'
+                                                                                            // also we have forEach method available for the NodeList which can be used as well without converting the NodeList into array
+
+--> document.getElementByClassName()                                                        // returns an HTMLCollection of all the elements with class name given in the argument
+                                                                                            // HTMLCollection is different from NodeList and doesn't have any forEach method 
+                                                                                            // so to use methods such as forEach, map, filter we will convert this HTMLCollection into an array
+                                                                                            // myClasses = Array.from(document.getElementByClassName('container'))
+                                                                                            // myClasses would be an array of all the elements with class container and through the array we can do manipulation of these elements
