@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+
+    // All the events in javascript run sequentially as javascript is a language which runs sequentially
+    // but there are some exeptions to it
+
+    // document.getElementById('owl').onclick = function(){                                     // one way of setting an event listener but not recommended as event propagation is not possible
+    //     alert("owl clicked")
+    // }
+
+     // attachEvent()                                                                           // these two methods were used earlier for event listening
+    // jQuery - onClick         
+
+    // type, timestamp, defaultPrevented                                                        // learn more about these event object methods and properties
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode
+
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul");
+    // }, false)                                                                                // the third parameter in addEventListener function is responsible for setting the type of event propagation
+                                                                                                // true -> event capturing which means the event would propagate from parent to child element
+                                                                                                // false(default and mostly used) -> event bubbling that means the event would propagate from child to parent element
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("owl clicked");
+    //     e.stopPropagation()                                                                  // stops the event propagation
+    // }, false)
+    
+    // document.getElementById('google').addEventListener('click',function(e){
+    //     e.preventDefault();                                                                  // prevents the default behaviour of the event i.e., we would not be directed to the google link
+    //     e.stopPropagation()
+    //     console.log("google clicked");
+    // }, false)
+   
+
+    // the code given below removes the image when it is clicked
+    // here we are selecting the whole ul element
+    // so in order to only delete the elements with image tags, we need to compare the element tag with IMG(case is important; only uppercase should be used)
+    // since we can also select <li> and <a> tags hence we need to compare the tag name
+    
+    document.querySelector('#images').addEventListener('click', function(e){
+        console.log(e.target.tagName);                                                          // e.target returns the innermost element of the place where the event has occurred
+                                                                                                // e.target.tagName gives the tag name of the selected element 
+        if (e.target.tagName === 'IMG') {
+            console.log(e.target.id);
+            let removeIt = e.target.parentNode                                                  // we need to delete the whole <li> node hence we are selecting the parent of the img
+            removeIt.remove()
+        }
+    
+        
+    })
+    
+    //removeIt.parentNode.removeChild(removeIt)                                                  // alternative of removeIt.remove()
+</script>
+</html>
