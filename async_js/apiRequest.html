@@ -1,0 +1,40 @@
+
+<!-- API data was requested into the javascript via XMLHttpRequest
+ Though fetch() and promise is used nowadays it was a very powerful interface availabe in web workers
+ use of the async functionality either by using fetch or XMLHttpRequest is called AJAX technique
+ you can use as an example github apis(https://api.github.com/users/JatinChauhan108)
+ or use https://randomuser.me/ to get random api data
+ you can use a JSON formatter on the internet to easily understand the api data -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121;">
+    0	UNSENT	Client has been created. open() not called yet.                                     <!--these are the states where an XMLHttpRequest client can be in-->
+    1	OPENED	open() has been called.
+    2	HEADERS_RECEIVED	send() has been called, and headers and status are available.
+    3	LOADING	Downloading; responseText holds partial data.   
+    4	DONE	The operation is complete.
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/hiteshchoudhary'
+    const xhr = new XMLHttpRequest();                                                               // initializes an XMLHttpRequest
+    xhr.open('GET', requestUrl)                                                                 
+    xhr.onreadystatechange = function(){                                                            // this function is called everytime the state of the client changes
+        console.log(xhr.readyState);                                                                // xhr.readyState gives the current state the client is in
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText)                                              // 'this' keyword is storing the current context i.e., the object 'xhr'
+                                                                                                    // responseText returns the data from the api
+                                                                                                    // this data is in the form of string and hence must be converted to a JSON Object so that we can access its properties
+                                                                                                    // JSON.parse() does the job
+            console.log(typeof data);                                                                   
+            console.log(data.followers);
+        }
+    }
+    xhr.send();
+</script>
+</html>
