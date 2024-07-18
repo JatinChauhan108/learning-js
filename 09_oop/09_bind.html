@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+    <button>Button Clicked</button>
+</body>
+<script>
+    class React {
+        constructor(){
+            this.library = "React"
+            this.server = "https://localhost:300"
+
+            //requirement
+            document
+                .querySelector('button')
+                .addEventListener('click', this.handleClick.bind(this))                             // If we just write this.handleClick then the "this" present in the handleClick() function would refer to the button element rather than the class instance app
+                                                                                                    // hence we need to use bind which not only passes the provided context to handleClick, but the context that would rather exist in the handleClick() would also be available
+                                                                                                    // i.e., it binds the context that is normally available to the handleClick with the context that we pass in the arguments 
+
+        }
+        handleClick(){
+            console.log("button clicked");
+            console.log(this.server);
+        }
+    }
+
+    const app = new React()
+</script>
+</html>
