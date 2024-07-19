@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure aur chai</title>
+</head>
+<body style="background-color: #313131;">
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+</body>
+
+    <script>
+    // function init() {                                            // example of lexical scoping
+    //     let name = "Mozilla"; 
+    //     function displayName() {                                 // this inner function has access to all the variables and functions of outer function init()
+                                                                    // but outside of init(), we don't have access to those variables and functions
+                                                                    // this is called lexical scoping, when inner functions have access to the scope of outer functions but outer functions don't have access to the scope of inner functions
+    //         console.log(name); 
+    //     }
+    //     displayName();
+    // }
+    // init();
+
+
+    // function makeFunc() {                                        // example of closures
+    //     const name = "Mozilla";
+    //     function displayName() {                                         
+    //         console.log(name);
+    //     }
+    //     return displayName;                                      // displayName is a function and it is returned outside of makeFunc() 
+    // }
+
+    // const myFunc = makeFunc();
+    // myFunc();                                                    // here the makeFunc() has been popped from the call stack and hence all its scope has also been deleted
+                                                                    // but when displayName was returned from makeFunc(), displayName, along with its definition also carried the lexical scope(i.e., all the scopes outside of displayName) with it
+                                                                    // hence the scope of makeFunc() will be available with myFunc() even after makeFunc() has been popped from the call stack
+                                                                    // this is the concept of closures
+
+    </script>
+
+    <!-- below script is where we can find the need of closures -->
+
+    <script>
+        // document.getElementById("orange").onclick = function(){                  // when orange button is clicked the function to the left side of assignment operator gets executed
+        //     document.body.style.backgroundColor = `orange`                       // hence the background of body gets changed
+        // }
+        // document.getElementById("green").onclick = function(){
+        //     document.body.style.backgroundColor = `green`
+        // }
+
+        
+        // but when we would have many buttons we would like to make a clickHandler that would be executed after any of the button is called
+        // and would change the background color of the body accordingly
+
+
+
+        function clickHandler(color){
+            // document.body.style.backgroundColor = `${color}`                             // consider that we omit the return statement and just use this, then our purpose is not fulfilled
+
+            return function(){
+                document.body.style.backgroundColor = `${color}`
+            }
+        }
+
+        document.getElementById('orange').onclick = clickHandler("orange")                  // we need to give a function reference to the left side of assignment operator
+                                                                                            // but we can't pass the color name just by giving reference
+                                                                                            // if we use paranthesis to give the color name, the function gets executed and without a return statement would execute the commented statement without even clicking any of the buttons
+                                                                                            // so instead of directly changing the background color, we return a function that does so, and closures helps us to maintain the value of the color variable, even when clickHandler dies out
+        document.getElementById('green').onclick = clickHandler("green")
+
+    </script>
+</html>
